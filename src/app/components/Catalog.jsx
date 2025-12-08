@@ -6,6 +6,19 @@ import PriceFilter from './PriceFilter';
 import ProductList from './ProductList';
 import CartSummary from './CartSummary';
 import StatusMessage from './StatusMessage';
+import InventoryChart from './InventoryChart';
+
+// Helper function to calculate total stock per category
+function getStockByCategory(products) {
+  const totals = {};
+  for (const product of products) {
+    totals[product.category] = (totals[product.category] ?? 0) + product.stock;
+  }
+  return Object.entries(totals).map(([category, totalStock]) => ({
+    category,
+    totalStock,
+  }));
+}
 
 export default function Catalog() {
   const [products, setProducts] = useState([]);
@@ -73,6 +86,11 @@ export default function Catalog() {
       return matchesCategory && matchesPrice;
     });
   }, [products, selectedCategory, maxPrice]);
+
+  // Calculate chart data from current products
+  const chartData = useMemo(() => {
+    return getStockByCategory(products);
+  }, [products]);
 
   // addToCart(id) decrements stock and increments cart quantity
   const addToCart = (id) => {
@@ -161,6 +179,13 @@ export default function Catalog() {
             onReset={resetCart}
           />
         </div>
+
+        {/* Inventory Overview Chart */}
+        {!loading && !error && (
+          <div className="mb-6">
+            <InventoryChart data={chartData} />
+          </div>
+        )}
 
         {/* StatusMessage */}
         <div className="mb-6">

@@ -139,5 +139,18 @@ src/
 - Responsive grid layout that works on all devices
 - Smooth transitions and hover effects
 
+## Copilot Reflection
+
+**How I used GitHub Copilot:**
+I used GitHub Copilot to implement a comprehensive inventory chart feature for my React + Next.js mini-storefront. Copilot assisted with generating the complete InventoryChart component using Recharts, including proper responsive container setup, tooltip configurations, and Tailwind CSS styling. It also helped create the `getStockByCategory` helper function to transform my existing product data into chart-ready format, and guided me through integrating the chart into the existing Catalog component while maintaining the proper data flow and state management patterns.
+
+**A Copilot suggestion I changed or rejected:**
+Initially, Copilot suggested using hard-coded sample data in the chart component for testing purposes, but I rejected this approach because the assignment specifically required using real data from the app state. Instead, I ensured the chart received live data through props that automatically updates when stock levels change, either through user interactions (adding items to cart) or the simulated stock decrements that occur every 5 seconds. This decision made the chart truly dynamic and meaningful rather than just decorative.
+
+**Where Copilot saved me time:**
+Copilot significantly saved me time by generating the complete Recharts configuration with proper axis labels, tooltips, and responsive design patterns that would have taken considerable research to implement manually. The suggestion to use `useMemo` for the chart data calculation was particularly valuable, as it ensured optimal performance by only recalculating when the products array changes, preventing unnecessary re-renders while maintaining real-time updates as stock levels fluctuate throughout the application.
 
 
+
+#   m i n i - s t o r e f r o n t - f i n a l - r e a c t - n a t i v e  
+ 
